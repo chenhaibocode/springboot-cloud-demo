@@ -1,0 +1,11 @@
+spring:
+  application:
+    name:  springcloud-eureka
+server:
+  port: 1212
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1212/eureka/
+    fetch-registry: false
+    register-with-eureka: false

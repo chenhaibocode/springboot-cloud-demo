@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: springcloud-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+          lowerCaseServiceId: true
+      routes:
+        - id: springcloud-server
+          uri: lb://SPRINGCLOUD-SERVER
+          predicates:
+            - Path=/user/**
+          filters:
+            - StripPrefix=1
+            - RequestTime=true
+server:
+  port: 1214
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1212/eureka/
+logging:
+  level:
+    org.springframework.cloud.gateway: debug

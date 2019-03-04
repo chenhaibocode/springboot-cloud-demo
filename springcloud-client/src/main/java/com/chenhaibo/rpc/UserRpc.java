@@ -1,9 +1,7 @@
 package com.chenhaibo.rpc;
 
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.chenhaibo.util.HttpUtil;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 /**
  * @Auther: chenhaibo
@@ -12,16 +10,13 @@ import org.springframework.web.client.RestTemplate;
  */
 @Service
 public class UserRpc {
-    private static final String url = "http://springcloud-server/user";
-    @Autowired
-    private RestTemplate restTemplate;
 
-    @HystrixCommand(fallbackMethod = "getUserIdByNameFallback")
     public String getUserIdByName(String name) {
-        return restTemplate.getForEntity(url + "/getUserIdByName?name=" + name, String.class).getBody();
-    }
-
-    private String getUserIdByNameFallback(String name) {
-        return "service error";
+        try {
+            return HttpUtil.httpGet("http://10.33.108.63:1214/user/user?name=" + name);
+        } catch (Exception e) {
+            System.out.println("#UserRpc.getUserIdByName# json结果处理失败");
+        }
+        return null;
     }
 }

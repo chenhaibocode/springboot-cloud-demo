@@ -6,11 +6,6 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://10.33.108.63:6606/uc?characterEncoding=UTF-8
     username: qa
-  cloud:
-    zookeeper:
-      connect-string: 10.33.107.16:2800
-      discovery:
-        root: /springcloud-server
 logging:
   level:
     com:
@@ -23,6 +18,8 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
 server:
-  port: 5555
-  tomcat:
-    uri-encoding: utf-8
+  port: 1213
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1212/eureka/
