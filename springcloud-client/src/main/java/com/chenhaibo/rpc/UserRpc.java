@@ -1,22 +1,17 @@
 package com.chenhaibo.rpc;
 
-import com.chenhaibo.util.HttpUtil;
-import org.springframework.stereotype.Service;
+import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  * @Auther: chenhaibo
  * @Date: 2018/11/18 15:15
  * @Description:
  */
-@Service
-public class UserRpc {
+@FeignClient(name = "springcloud-server")
+public interface UserRpc {
 
-    public String getUserIdByName(String name) {
-        try {
-            return HttpUtil.httpGet("http://10.33.108.63:1214/user/user?name=" + name);
-        } catch (Exception e) {
-            System.out.println("#UserRpc.getUserIdByName# json结果处理失败");
-        }
-        return null;
-    }
+    @GetMapping("/user/{name}")
+    String getUserIdByName(@PathVariable("name") String name);
 }

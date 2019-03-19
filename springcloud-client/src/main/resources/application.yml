@@ -1,4 +1,11 @@
+spring:
+  application:
+    name: springcloud-client
 server:
   port: 6666
   tomcat:
     uri-encoding: utf-8
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:4141/eureka/
